@@ -1,0 +1,186 @@
+.product-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Loading State */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.loading-container p {
+    margin-top: 16px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* Form Card */
+.form-card {
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mat-mdc-card-header {
+    padding-bottom: 16px;
+}
+
+.mat-mdc-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+/* Form Styles */
+.product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px 0;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.form-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Form Field Styling */
+.mat-mdc-form-field {
+    font-size: 14px;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-label {
+    color: var(--mdc-theme-primary, #1976d2);
+}
+
+/* Error Styling */
+.error {
+    border-color: #f44336 !important;
+}
+
+.mat-mdc-form-field.mat-form-field-invalid .mat-mdc-text-field-wrapper {
+    background-color: rgba(244, 67, 54, 0.04);
+}
+
+/* Button Styling */
+.form-actions button {
+    min-width: 120px;
+    height: 48px;
+}
+
+.mat-mdc-raised-button {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.mat-mdc-raised-button:disabled {
+    background-color: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.26);
+}
+
+/* Spinner in button */
+.mat-mdc-raised-button mat-spinner {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+/* Icon styling */
+.mat-mdc-card-title mat-icon {
+    color: var(--mdc-theme-primary, #1976d2);
+}
+
+.form-actions mat-icon {
+    margin-right: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-form-container {
+        padding: 10px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        gap: 12px;
+    }
+
+    .form-actions button {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .mat-mdc-card-header {
+        padding: 12px 16px;
+    }
+
+    .mat-mdc-card-content {
+        padding: 0 16px 16px;
+    }
+
+    .product-form {
+        gap: 16px;
+    }
+
+    .mat-mdc-card-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Focus and hover effects */
+.mat-mdc-raised-button:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease-in-out;
+}
+
+.mat-mdc-stroked-button:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Input focus effects */
+.mat-mdc-input-element:focus {
+    outline: none;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-notch-piece {
+    border-color: var(--mdc-theme-primary, #1976d2);
+    border-width: 2px;
+}
+
+/* Validation states */
+.mat-mdc-form-field.mat-form-field-invalid .mat-mdc-notch-piece {
+    border-color: #f44336;
+}
+
+.mat-mdc-form-field.mat-form-field-invalid .mat-mdc-floating-label {
+    color: #f44336;
+}
+
+/* Debug card (hidden by default) */
+.debug-card {
+    background-color: #f5f5f5;
+    border: 1px dashed #ccc;
+}
+
+.debug-card pre {
+    background: white;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    overflow-x: auto;
+}

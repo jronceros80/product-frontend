@@ -1,0 +1,152 @@
+.confirm-dialog {
+    min-width: 350px;
+    max-width: 500px;
+}
+
+/* Header */
+.dialog-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 24px 16px;
+    margin-bottom: 0;
+}
+
+.warning-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: #ff9800;
+}
+
+.dialog-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+/* Content */
+.dialog-content {
+    padding: 0 24px 20px;
+    min-height: 60px;
+}
+
+.main-message {
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.87);
+    margin: 0 0 12px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0;
+    font-style: italic;
+}
+
+/* Actions */
+.dialog-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding: 16px 24px 20px;
+    margin-top: 0;
+}
+
+.cancel-button,
+.confirm-button {
+    min-width: 100px;
+    height: 40px;
+}
+
+.cancel-button mat-icon,
+.confirm-button mat-icon {
+    margin-right: 8px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+/* Button Styling */
+.mat-mdc-stroked-button {
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+.mat-mdc-stroked-button:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.mat-mdc-raised-button {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.mat-mdc-raised-button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .confirm-dialog {
+        min-width: 280px;
+        max-width: 320px;
+    }
+
+    .dialog-header {
+        padding: 16px 20px 12px;
+    }
+
+    .dialog-header h2 {
+        font-size: 18px;
+    }
+
+    .dialog-content {
+        padding: 0 20px 16px;
+    }
+
+    .dialog-actions {
+        flex-direction: column-reverse;
+        padding: 12px 20px 16px;
+        gap: 8px;
+    }
+
+    .cancel-button,
+    .confirm-button {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .warning-icon {
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* Animation */
+.confirm-dialog {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Focus States */
+.cancel-button:focus,
+.confirm-button:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
+}

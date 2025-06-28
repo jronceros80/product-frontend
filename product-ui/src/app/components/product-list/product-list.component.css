@@ -1,0 +1,223 @@
+.product-list-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+/* Filters Card */
+.filters-card {
+    margin-bottom: 20px;
+}
+
+.filters-form {
+    padding-top: 16px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-field {
+    flex: 1;
+    min-width: 200px;
+}
+
+.clear-button {
+    height: 56px;
+    margin-top: 8px;
+}
+
+/* Table Card */
+.table-card {
+    margin-bottom: 20px;
+}
+
+.table-container {
+    min-height: 400px;
+    position: relative;
+}
+
+.products-table {
+    width: 100%;
+}
+
+.actions-container {
+    display: flex;
+    gap: 4px;
+}
+
+/* Loading State */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.loading-container p {
+    margin-top: 16px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* Empty State */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: rgba(0, 0, 0, 0.3);
+    margin-bottom: 16px;
+}
+
+.empty-state h3 {
+    margin: 16px 0 8px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.empty-state p {
+    margin-bottom: 24px;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-list-container {
+        padding: 10px;
+    }
+
+    .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-field {
+        min-width: auto;
+    }
+
+    .clear-button {
+        height: auto;
+        margin-top: 0;
+    }
+
+    .products-table {
+        font-size: 14px;
+    }
+
+    .actions-container {
+        flex-direction: column;
+        gap: 2px;
+    }
+}
+
+/* Material Design Enhancements */
+.mat-mdc-card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.mat-mdc-table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.mat-mdc-header-cell {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-mdc-chip {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    min-height: 24px !important;
+}
+
+.mat-mdc-chip.mat-mdc-standard-chip {
+    --mdc-chip-container-height: 24px;
+}
+
+.mat-mdc-chip.mdc-evolution-chip--selected {
+    background-color: var(--mdc-chip-elevated-container-color);
+}
+
+.mat-mdc-chip.mat-primary {
+    background-color: #e3f2fd !important;
+    color: #1976d2 !important;
+}
+
+.mat-mdc-chip.mat-warn {
+    background-color: #ffebee !important;
+    color: #f44336 !important;
+}
+
+.mat-mdc-chip.mat-accent {
+    background-color: #f3e5f5 !important;
+    color: #9c27b0 !important;
+}
+
+/* Hover Effects */
+.mat-mdc-row:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.mat-mdc-icon-button:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Chip Styles */
+:host ::ng-deep .mdc-evolution-chip {
+    height: 32px !important;
+}
+
+:host ::ng-deep .mdc-evolution-chip__text-label {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 0 12px;
+    color: inherit !important;
+}
+
+:host ::ng-deep .mat-mdc-chip.mat-primary {
+    --mdc-chip-elevated-container-color: #e3f2fd;
+    --mdc-chip-label-text-color: #1976d2;
+    background-color: #e3f2fd !important;
+}
+
+:host ::ng-deep .mat-mdc-chip.mat-warn {
+    --mdc-chip-elevated-container-color: #ffebee;
+    --mdc-chip-label-text-color: #f44336;
+    background-color: #ffebee !important;
+}
+
+:host ::ng-deep .mat-mdc-chip.mat-accent {
+    --mdc-chip-elevated-container-color: #f3e5f5;
+    --mdc-chip-label-text-color: #9c27b0;
+    background-color: #f3e5f5 !important;
+}
+
+:host ::ng-deep .mat-mdc-chip-set {
+    margin: 4px 0;
+}
+
+/* Table Styles */
+.mat-column-status,
+.mat-column-category {
+    min-width: 120px;
+    padding: 0 8px;
+}

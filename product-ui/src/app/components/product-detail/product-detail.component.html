@@ -1,0 +1,105 @@
+<div class="product-detail-container">
+    <!-- Header -->
+    <mat-toolbar color="primary">
+        <button mat-icon-button (click)="navigateToList()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span style="margin-left: 10px;">Product Details</span>
+    </mat-toolbar>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading product details...</p>
+    </div>
+
+    <!-- Product Details -->
+    <div *ngIf="!loading && product" class="product-detail-container">
+        <!-- Main Content -->
+        <mat-card class="product-card">
+            <mat-card-content>
+                <!-- Product Header -->
+                <div class="product-header">
+                    <div class="product-title">
+                        <mat-icon>inventory_2</mat-icon>
+                        <h2>{{ product.name }}</h2>
+                    </div>
+                    <p class="product-id">ID: {{ product.id }}</p>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <!-- Product Info -->
+                <div class="info-grid">
+                    <!-- Price -->
+                    <div class="info-item">
+                        <div class="info-label">
+                            <mat-icon>euro</mat-icon>
+                            <span>Price</span>
+                        </div>
+                        <p class="price">{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</p>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="info-item">
+                        <div class="info-label">
+                            <mat-icon>{{ getCategoryIcon(product.category) }}</mat-icon>
+                            <span>Category</span>
+                        </div>
+                        <mat-chip-set>
+                            <mat-chip [color]="getCategoryColor(product.category)" highlighted>
+                                {{ formatCategoryForDisplay(product.category) }}
+                            </mat-chip>
+                        </mat-chip-set>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="info-item">
+                        <div class="info-label">
+                            <mat-icon>{{ getStatusIcon(product.status) }}</mat-icon>
+                            <span>Status</span>
+                        </div>
+                        <mat-chip-set>
+                            <mat-chip [color]="getStatusColor(product.status)" highlighted>
+                                {{ product.status }}
+                            </mat-chip>
+                        </mat-chip-set>
+                    </div>
+                </div>
+            </mat-card-content>
+
+            <!-- Actions -->
+            <mat-card-actions>
+                <button mat-stroked-button color="primary" (click)="navigateToList()">
+                    <mat-icon>list</mat-icon>
+                    Back to List
+                </button>
+                <button mat-stroked-button color="accent" (click)="navigateToEdit()">
+                    <mat-icon>edit</mat-icon>
+                    Edit
+                </button>
+                <button mat-stroked-button color="warn" (click)="deleteProduct()">
+                    <mat-icon>delete</mat-icon>
+                    Delete
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="!loading && !product" class="error-state">
+        <mat-card class="error-card">
+            <mat-card-content>
+                <div class="error-content">
+                    <mat-icon class="error-icon">error_outline</mat-icon>
+                    <h3>Product not found</h3>
+                    <p>The product you are looking for does not exist or has been deleted.</p>
+                    <button mat-raised-button color="primary" (click)="navigateToList()">
+                        <mat-icon>list</mat-icon>
+                        Back to List
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

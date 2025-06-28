@@ -1,0 +1,10 @@
+/* Global styles for the application */
+:host {
+    display: block;
+    min-height: 100vh;
+    background-color: #fafafa;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
