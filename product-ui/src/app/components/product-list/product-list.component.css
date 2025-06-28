@@ -20,7 +20,7 @@
 .filter-row {
     display: flex;
     gap: 16px;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
 }
 
@@ -30,8 +30,9 @@
 }
 
 .clear-button {
-    height: 56px;
-    margin-top: 8px;
+    margin-top: 4px;
+    height: 51px;
+    align-self: flex-start;
 }
 
 /* Table Card */
