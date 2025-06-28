@@ -2,6 +2,6 @@
   "version": 2,
   "framework": "angular",
   "outputDirectory": "dist/product-ui/browser",
-  "buildCommand": "npm ci && ng build",
-  "installCommand": "npm ci --prefer-offline --no-audit"
+  "buildCommand": "npm install && ng build",
+  "installCommand": "npm install --no-audit"
 }
