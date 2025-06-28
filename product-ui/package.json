@@ -8,7 +8,8 @@
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
         "clean": "rm -rf node_modules && rm -rf dist",
-        "clean:install": "npm run clean && npm install"
+        "clean:install": "npm run clean && npm install",
+        "postinstall": "npm rebuild"
     },
     "prettier": {
         "overrides": [
@@ -32,6 +33,10 @@
         "@angular/platform-browser": "^17.1.0",
         "@angular/platform-browser-dynamic": "^17.1.0",
         "@angular/router": "^17.1.0",
+        "css-select": "^5.1.0",
+        "css-what": "^6.1.0",
+        "boolbase": "^1.0.0",
+        "nth-check": "^2.1.1",
         "rxjs": "~7.8.0",
         "tslib": "^2.3.0",
         "zone.js": "~0.14.3"
@@ -41,7 +46,6 @@
         "@angular/cli": "^17.1.0",
         "@angular/compiler-cli": "^17.1.0",
         "@types/jasmine": "~5.1.0",
-        "css-select": "^5.1.0",
         "jasmine-core": "~5.7.0",
         "karma": "~6.4.0",
         "karma-chrome-launcher": "~3.2.0",
