@@ -9,11 +9,13 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
+    "esModuleInterop": true,
     "isolatedModules": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "es2022",
+    "module": "ES2022",
+    "moduleResolution": "node",
     "lib": [
       "ES2022",
       "dom"
@@ -21,7 +23,12 @@
     "useDefineForClassFields": false,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./",
-    "outDir": "./dist/out-tsc"
+    "outDir": "./dist/out-tsc",
+    "paths": {
+      "@angular/*": [
+        "./node_modules/@angular/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

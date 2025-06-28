@@ -3,10 +3,13 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet],
-  template: '<router-outlet></router-outlet>',
-  styleUrl: './app.css'
+  template: `
+    <router-outlet></router-outlet>
+  `,
+  styles: []
 })
 export class App {
-  protected title = 'Product Management';
+  title = 'product-ui';
 }
