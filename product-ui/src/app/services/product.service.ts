@@ -9,27 +9,8 @@ import {
     ProductListResponse,
     ProductStatus
 } from '../models/product.model';
+import { ApiProductResponse, ApiResponse } from '../models/response.model';
 import { environment } from '../../environments/environment';
-
-interface ApiProductResponse {
-    id: number;
-    name: string;
-    price: number;
-    category: string;
-    active: boolean;
-}
-
-interface ApiResponse {
-    _embedded: {
-        productResponseDTOList: ApiProductResponse[];
-    };
-    page: {
-        totalElements: number;
-        totalPages: number;
-        number: number;
-        size: number;
-    };
-}
 
 @Injectable({
     providedIn: 'root'
