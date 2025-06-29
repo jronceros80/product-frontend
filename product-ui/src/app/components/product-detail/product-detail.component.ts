@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-// Angular Material Imports
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -152,4 +151,4 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     getStatusIcon(status: ProductStatus): string {
         return status === ProductStatus.ACTIVE ? 'check_circle' : 'cancel';
     }
-} 
+}

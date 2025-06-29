@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
 
-// Angular Material Imports
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
@@ -203,4 +202,4 @@ export class ProductListComponent implements OnInit, OnDestroy {
     getCategoryText(category: ProductCategory): string {
         return formatCategoryForDisplay(category);
     }
-} 
+}

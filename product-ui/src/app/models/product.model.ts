@@ -25,13 +25,11 @@ export enum ProductCategory {
     BOOKS = 'Books'
 }
 
-// Helper functions for category formatting
 export const formatCategoryForDisplay = (category: ProductCategory): string => {
     return category.toUpperCase();
 };
 
 export const formatCategoryForApi = (category: string): ProductCategory => {
-    // Convert from UI format (ELECTRONICS) to API format (Electronics)
     return ProductCategory[category as keyof typeof ProductCategory];
 };
 
@@ -52,4 +50,4 @@ export interface ProductListResponse {
     totalPages: number;
     currentPage: number;
     pageSize: number;
-} 
+}

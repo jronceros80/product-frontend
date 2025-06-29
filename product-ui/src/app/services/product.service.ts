@@ -49,9 +49,6 @@ export class ProductService {
         };
     }
 
-    /**
-     * Obtener lista de productos con filtros y paginación
-     */
     getProducts(
         filters: ProductFilters = {},
         page: number = 0,
@@ -96,9 +93,6 @@ export class ProductService {
             );
     }
 
-    /**
-     * Obtener un producto por ID
-     */
     getProductById(id: number): Observable<Product> {
         return this.http.get<ApiProductResponse>(`${this.apiUrl}/${id}`)
             .pipe(
@@ -110,34 +104,22 @@ export class ProductService {
             );
     }
 
-    /**
-     * Crear un nuevo producto
-     */
     createProduct(product: CreateProductRequest): Observable<Product> {
         return this.http.post<ApiProductResponse>(this.apiUrl, product)
             .pipe(map(response => this.mapProduct(response)));
     }
 
-    /**
-     * Actualizar un producto existente
-     */
     updateProduct(id: number, product: UpdateProductRequest): Observable<Product> {
         return this.http.put<ApiProductResponse>(`${this.apiUrl}/${id}`, product)
             .pipe(map(response => this.mapProduct(response)));
     }
 
-    /**
-     * Eliminar/desactivar un producto
-     */
     deleteProduct(id: number): Observable<void> {
         return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
 
-    /**
-     * Cambiar estado de un producto (activar/desactivar)
-     */
     toggleProductStatus(id: number): Observable<Product> {
         return this.http.patch<ApiProductResponse>(`${this.apiUrl}/${id}/toggle-status`, {})
             .pipe(map(response => this.mapProduct(response)));
     }
-} 
+}

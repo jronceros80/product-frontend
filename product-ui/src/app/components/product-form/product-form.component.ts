@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-// Angular Material Imports
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -74,7 +73,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
             name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
             price: ['', [Validators.required, Validators.min(0.01), Validators.max(999999.99)]],
             category: ['', Validators.required],
-            status: [ProductStatus.ACTIVE] // Default to ACTIVE for new products
+            status: [ProductStatus.ACTIVE]
         });
     }
 
@@ -194,7 +193,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         }
     }
 
-    // Form validation helpers
     getErrorMessage(fieldName: string): string {
         const control = this.productForm.get(fieldName);
         if (control?.hasError('required')) {
@@ -230,8 +228,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         return !!(control && control.invalid && (control.dirty || control.touched));
     }
 
-    // Add helper method for category display
     formatCategory(category: ProductCategory): string {
         return formatCategoryForDisplay(category);
     }
-} 
+}
