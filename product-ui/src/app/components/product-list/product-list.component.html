@@ -4,7 +4,10 @@
         <mat-icon>inventory</mat-icon>
         <span style="margin-left: 10px;">Products</span>
         <span class="spacer"></span>
-        <button mat-raised-button color="accent" (click)="navigateToCreate()">
+        <button mat-icon-button color="accent" (click)="refreshData()" matTooltip="Refresh data">
+            <mat-icon>refresh</mat-icon>
+        </button>
+        <button mat-raised-button color="accent" (click)="navigateToCreate()" style="margin-left: 8px;">
             <mat-icon>add</mat-icon>
             New Product
         </button>

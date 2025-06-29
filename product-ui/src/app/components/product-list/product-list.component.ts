@@ -90,8 +90,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
     private setupFilterSubscription(): void {
         this.filterForm.valueChanges
             .pipe(
-                debounceTime(500),
-                distinctUntilChanged(),
+                debounceTime(800), // Increased debounce time to reduce API calls
+                distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)),
                 takeUntil(this.destroy$)
             )
             .subscribe(() => {
@@ -100,11 +100,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
             });
     }
 
-    loadProducts(): void {
+    loadProducts(useCache: boolean = true): void {
         this.loading = true;
         const filters: ProductFilters = this.filterForm.value;
 
-        this.productService.getProducts(filters, this.currentPage, this.pageSize)
+        this.productService.getProducts(filters, this.currentPage, this.pageSize, useCache)
             .pipe(
                 takeUntil(this.destroy$),
                 finalize(() => this.loading = false)
@@ -121,6 +121,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
                     this.totalElements = 0;
                 }
             });
+    }
+
+    /**
+     * Refresh data by clearing cache and reloading
+     */
+    refreshData(): void {
+        this.productService.invalidateCache();
+        this.loadProducts(false); // Force fresh data
+        this.snackBar.open('Data refreshed successfully', 'Close', { duration: 2000 });
     }
 
     onPageChange(event: PageEvent): void {
