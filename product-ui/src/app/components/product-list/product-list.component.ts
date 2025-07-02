@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
 
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -32,7 +31,6 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
         FormsModule,
         ReactiveFormsModule,
         MatTableModule,
-        MatPaginatorModule,
         MatButtonModule,
         MatIconModule,
         MatInputModule,
@@ -49,10 +47,17 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class ProductListComponent implements OnInit, OnDestroy {
     products: Product[] = [];
-    totalElements = 0;
-    currentPage = 0;
+    currentCursor?: string;
+    nextCursor?: string;
+    previousCursor?: string;
+    hasNext = false;
+    hasPrevious = false;
     pageSize = 10;
+    totalSize = 0;
     loading = true;
+
+    private cursorHistory: (string | undefined)[] = [undefined];
+    currentHistoryIndex = 0;
 
     displayedColumns: string[] = ['id', 'name', 'price', 'category', 'status', 'actions'];
 
@@ -90,51 +95,83 @@ export class ProductListComponent implements OnInit, OnDestroy {
     private setupFilterSubscription(): void {
         this.filterForm.valueChanges
             .pipe(
-                debounceTime(800), // Increased debounce time to reduce API calls
+                debounceTime(500),
                 distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)),
                 takeUntil(this.destroy$)
             )
             .subscribe(() => {
-                this.currentPage = 0;
+                this.resetPagination();
                 this.loadProducts();
             });
     }
 
-    loadProducts(useCache: boolean = true): void {
-        this.loading = true;
-        const filters: ProductFilters = this.filterForm.value;
+    private resetPagination(): void {
+        this.currentCursor = undefined;
+        this.nextCursor = undefined;
+        this.previousCursor = undefined;
+        this.cursorHistory = [undefined];
+        this.currentHistoryIndex = 0;
+    }
 
-        this.productService.getProducts(filters, this.currentPage, this.pageSize, useCache)
+    loadProducts(): void {
+        this.loading = true;
+        const filters: ProductFilters = {
+            ...this.filterForm.value,
+            sortBy: 'id',
+            sortDir: 'asc' as const
+        };
+
+        this.productService.getProducts(filters, this.currentCursor, this.pageSize)
             .pipe(
                 takeUntil(this.destroy$),
                 finalize(() => this.loading = false)
             )
             .subscribe({
                 next: (response) => {
-                    this.products = response.products || [];
-                    this.totalElements = response.totalElements || 0;
+                    this.products = response.content || [];
+                    this.nextCursor = response.nextCursor;
+                    this.previousCursor = response.previousCursor;
+                    this.hasNext = response.hasNext;
+                    this.hasPrevious = response.hasPrevious;
+                    this.totalSize = response.size;
                 },
                 error: (error) => {
                     console.error('Error loading products:', error);
                     this.snackBar.open('Error loading products. Please try again later.', 'Close', { duration: 5000 });
                     this.products = [];
-                    this.totalElements = 0;
+                    this.hasNext = false;
+                    this.hasPrevious = false;
+                    this.totalSize = 0;
                 }
             });
     }
 
-    /**
-     * Refresh data by clearing cache and reloading
-     */
-    refreshData(): void {
-        this.productService.invalidateCache();
-        this.loadProducts(false); // Force fresh data
-        this.snackBar.open('Data refreshed successfully', 'Close', { duration: 2000 });
+    goToNextPage(): void {
+        if (this.hasNext && this.nextCursor) {
+            if (this.currentHistoryIndex === this.cursorHistory.length - 1) {
+                this.cursorHistory.push(this.nextCursor);
+            }
+            this.currentHistoryIndex++;
+            this.currentCursor = this.nextCursor;
+            this.loadProducts();
+        }
     }
 
-    onPageChange(event: PageEvent): void {
-        this.currentPage = event.pageIndex;
-        this.pageSize = event.pageSize;
+    goToPreviousPage(): void {
+        if (this.hasPrevious && this.currentHistoryIndex > 0) {
+            this.currentHistoryIndex--;
+            this.currentCursor = this.cursorHistory[this.currentHistoryIndex];
+            this.loadProducts();
+        }
+    }
+
+    goToFirstPage(): void {
+        this.resetPagination();
+        this.loadProducts();
+    }
+
+    refreshData(): void {
+        this.snackBar.open('Refreshing data...', 'Close', { duration: 2000 });
         this.loadProducts();
     }
 
@@ -198,14 +235,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }
 
     getStatusColor(status: ProductStatus): string {
-        switch (status) {
-            case ProductStatus.ACTIVE:
-                return 'primary';
-            case ProductStatus.INACTIVE:
-                return 'warn';
-            default:
-                return '';
-        }
+        return status === ProductStatus.ACTIVE ? 'primary' : 'warn';
     }
 
     getCategoryText(category: ProductCategory): string {

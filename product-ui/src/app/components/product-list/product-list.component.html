@@ -147,11 +147,28 @@
                 </div>
             </div>
 
-            <!-- Pagination -->
-            <mat-paginator *ngIf="!loading && products.length > 0" [length]="totalElements" [pageSize]="pageSize"
-                [pageIndex]="currentPage" [pageSizeOptions]="[5, 10, 20, 50]" (page)="onPageChange($event)"
-                showFirstLastButtons>
-            </mat-paginator>
+            <!-- Cursor-based Pagination -->
+            <div *ngIf="!loading && products.length > 0" class="pagination-container">
+                <div class="pagination-info">
+                    <span>Showing {{ products.length }} of {{ totalSize }} products</span>
+                </div>
+                <div class="pagination-controls">
+                    <button mat-icon-button (click)="goToFirstPage()"
+                        [disabled]="!hasPrevious || currentHistoryIndex === 0" matTooltip="First page">
+                        <mat-icon>first_page</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="goToPreviousPage()" [disabled]="!hasPrevious"
+                        matTooltip="Previous page">
+                        <mat-icon>chevron_left</mat-icon>
+                    </button>
+                    <span class="pagination-status">
+                        Page {{ currentHistoryIndex + 1 }}
+                    </span>
+                    <button mat-icon-button (click)="goToNextPage()" [disabled]="!hasNext" matTooltip="Next page">
+                        <mat-icon>chevron_right</mat-icon>
+                    </button>
+                </div>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>

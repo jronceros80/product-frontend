@@ -42,12 +42,25 @@ export interface ProductFilters {
     name?: string;
     category?: ProductCategory | 'ALL';
     status?: ProductStatus | 'ALL';
+    limit?: number;
+    sortBy?: string;
+    sortDir?: 'asc' | 'desc';
 }
 
 export interface ProductListResponse {
-    products: Product[];
-    totalElements: number;
-    totalPages: number;
-    currentPage: number;
-    pageSize: number;
+    content: Product[];
+    nextCursor?: string;
+    previousCursor?: string;
+    hasNext: boolean;
+    hasPrevious: boolean;
+    size: number;
+    limit: number;
+    pageInfo: {
+        size: number;
+        limit: number;
+        hasNext: boolean;
+        hasPrevious: boolean;
+        nextCursor?: string;
+        previousCursor?: string;
+    };
 }

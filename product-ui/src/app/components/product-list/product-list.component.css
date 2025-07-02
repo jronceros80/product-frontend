@@ -222,3 +222,60 @@
     min-width: 120px;
     padding: 0 8px;
 }
+
+/* Cursor-based Pagination Styles */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    margin-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.pagination-info {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pagination-status {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0 16px;
+    font-weight: 500;
+}
+
+.pagination-controls button {
+    border-radius: 50%;
+}
+
+.pagination-controls button:disabled {
+    opacity: 0.5;
+}
+
+.pagination-controls button:not(:disabled):hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Responsive pagination */
+@media (max-width: 768px) {
+    .pagination-container {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .pagination-info {
+        order: 2;
+    }
+
+    .pagination-controls {
+        order: 1;
+    }
+}

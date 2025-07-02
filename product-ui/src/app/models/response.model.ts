@@ -7,13 +7,19 @@ export interface ApiProductResponse {
 }
 
 export interface ApiResponse {
-    _embedded: {
-        productResponseDTOList: ApiProductResponse[];
-    };
-    page: {
-        totalElements: number;
-        totalPages: number;
-        number: number;
+    content: ApiProductResponse[];
+    nextCursor?: string;
+    previousCursor?: string;
+    hasNext: boolean;
+    hasPrevious: boolean;
+    size: number;
+    limit: number;
+    pageInfo: {
         size: number;
+        limit: number;
+        hasNext: boolean;
+        hasPrevious: boolean;
+        nextCursor?: string;
+        previousCursor?: string;
     };
 } 
