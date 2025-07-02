@@ -53,6 +53,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     hasNext = false;
     hasPrevious = false;
     pageSize = 10;
+    availablePageSizes = [5, 10, 25, 50, 100];
     totalSize = 0;
     loading = true;
 
@@ -173,6 +174,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
     refreshData(): void {
         this.snackBar.open('Refreshing data...', 'Close', { duration: 2000 });
         this.loadProducts();
+    }
+
+    onPageSizeChange(newPageSize: number): void {
+        if (this.pageSize !== newPageSize) {
+            this.pageSize = newPageSize;
+            this.resetPagination();
+            this.loadProducts();
+        }
     }
 
     navigateToCreate(): void {

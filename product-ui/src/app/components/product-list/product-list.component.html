@@ -152,6 +152,18 @@
                 <div class="pagination-info">
                     <span>Showing {{ products.length }} of {{ totalSize }} products</span>
                 </div>
+
+                <div class="pagination-size-selector">
+                    <mat-form-field appearance="outline" class="page-size-field">
+                        <mat-label>Items per page</mat-label>
+                        <mat-select [value]="pageSize" (selectionChange)="onPageSizeChange($event.value)">
+                            <mat-option *ngFor="let size of availablePageSizes" [value]="size">
+                                {{ size }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
                 <div class="pagination-controls">
                     <button mat-icon-button (click)="goToFirstPage()"
                         [disabled]="!hasPrevious || currentHistoryIndex === 0" matTooltip="First page">
